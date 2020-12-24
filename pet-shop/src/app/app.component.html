@@ -1,0 +1,38 @@
+<div class="header">
+  <p>PETSHOP</p>
+</div>
+
+<div class="card-container">
+  <div class="card card-1" *ngFor="let pet of (pets$ | async)">
+    <div (click)="select(pet.name)">
+      <div class="card-img" [style.background-image]="pet?.img"></div>
+      <a class="card-link">
+        <div class="card-img-hovered" [style.background-image]="pet?.img"></div>
+      </a>
+      <div class="card-info">
+        <div class="card-about">
+          <a class="card-tag tag-news">{{ pet.cost }}</a>
+        </div>
+        <h1 class="card-title">{{ pet.name }}</h1>
+        <div class="card-creator">{{ pet.type }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="(selected$ | async)?.length > 0" class="buy" style="display: flex; flex-direction: row;">
+  <div class="card card-1" *ngFor="let pet of (selected$ | async)">
+    <div class="card-img" [style.background-image]="pet?.img"></div>
+    <a class="card-link">
+      <div class="card-img-hovered" [style.background-image]="pet?.img"></div>
+    </a>
+    <div class="card-info">
+      <div class="card-about">
+        <a class="card-tag tag-news">{{ pet.cost }}</a>
+      </div>
+      <h1 class="card-title">{{ pet.name }}</h1>
+      <div class="card-creator">{{ pet.type }}</div>
+    </div>
+  </div>
+  <button style="margin-left: auto;" (click)="buy()">Buy</button>
+</div>
